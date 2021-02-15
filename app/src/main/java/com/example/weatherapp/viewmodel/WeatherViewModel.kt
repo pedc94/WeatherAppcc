@@ -35,16 +35,4 @@ class WeatherViewModel(private val weatherService : IWeatherService) : ViewModel
 
         }
     }
-
-    /*val fetchService = liveData(Dispatchers.IO) {
-        try {
-            val fetchedData = weatherService.getForecast()
-            Log.d("viewmodel","Si jala")
-            emit(fetchedData)
-        } catch (exception: Exception) {
-            Log.d("viewmodel","No jala")
-            emit( "Error Occurred!")
-        }
-
-    }*/
 }
