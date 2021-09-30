@@ -1,13 +1,11 @@
 package com.example.weatherapp.data.api.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.squareup.moshi.Json
 
-@Parcelize
 data class Forecast(
-    val city: City,
-    val cnt: Int,
-    val cod: String,
-    val list: List<ForecastList>,
-    val message: Int
-) :Parcelable
+    @field:Json(name = "city") val city: City,
+    @field:Json(name = "cnt") val cnt: Int,
+    @field:Json(name = "cod") val cod: String,
+    @field:Json(name = "list") val forecastList: List<ForecastList>,
+    @field:Json(name = "message") val message: Int,
+)

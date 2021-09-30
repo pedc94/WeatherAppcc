@@ -1,18 +1,16 @@
 package com.example.weatherapp.data.api.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.squareup.moshi.Json
 
-@Parcelize
 data class ForecastList(
-    val clouds: Clouds,
-    val dt: Int,
-    val dt_txt: String,
-    val main: Main,
-    val pop: Double,
-    val rain: Rain,
-    val sys: Sys,
-    val visibility: Int,
-    val weather: List<Weather>,
-    val wind: Wind
-) : Parcelable
+    @field:Json(name = "clouds") val clouds: Clouds,
+    @field:Json(name = "dt") val dateTime: Int,
+    @field:Json(name = "dt_txt") val dateText: String,
+    @field:Json(name = "main") val main: Main,
+    @field:Json(name = "pop") val pop: Double,
+    @field:Json(name = "rain") val rain: Rain,
+    @field:Json(name = "sys") val sys: Sys,
+    @field:Json(name = "visibility") val visibility: Int,
+    @field:Json(name = "weather") val weatherList: List<Weather>,
+    @field:Json(name = "wind") val wind: Wind,
+)

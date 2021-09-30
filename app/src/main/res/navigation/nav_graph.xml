@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/lookUpFragment"
-        android:name="com.example.weatherapp.ui.fragments.LookUpFragment"
+        android:name="com.example.weatherapp.presentation.feature.weatherlookup.LookUpFragment"
         android:label="WeatherApp"
-        tools:layout="@layout/fragment_look_up" >
+        tools:layout="@layout/fragment_look_up">
         <action
             android:id="@+id/action_lookUpFragment_to_weatherFragment"
             app:destination="@id/weatherFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherFragment"
-        android:name="com.example.weatherapp.ui.fragments.WeatherListFragment"
+        android:name="com.example.weatherapp.presentation.feature.weatherlist.WeatherListFragment"
         android:label="fragment_weather_list"
-        tools:layout="@layout/fragment_weather_list" >
+        tools:layout="@layout/fragment_weather_list">
         <action
             android:id="@+id/action_weatherFragment_to_weatherDetailsFragment"
             app:destination="@id/weatherDetailsFragment" />
@@ -27,21 +27,18 @@
             app:destination="@id/lookUpFragment" />
         <argument
             android:name="forecast"
-            app:argType="com.example.weatherapp.data.api.model.Forecast" />
+            app:argType="com.example.weatherapp.domain.model.ForecastModel[]" />
     </fragment>
     <fragment
         android:id="@+id/weatherDetailsFragment"
-        android:name="com.example.weatherapp.ui.fragments.WeatherDetailsFragment"
+        android:name="com.example.weatherapp.presentation.feature.weatherdetails.WeatherDetailsFragment"
         android:label="fragment_weather_details"
-        tools:layout="@layout/fragment_weather_details" >
+        tools:layout="@layout/fragment_weather_details">
         <action
             android:id="@+id/action_weatherDetailsFragment_to_weatherFragment"
             app:destination="@id/weatherFragment" />
         <argument
             android:name="selectedForecast"
-            app:argType="com.example.weatherapp.data.api.model.ForecastList" />
-        <argument
-            android:name="cityName"
-            app:argType="string" />
+            app:argType="com.example.weatherapp.domain.model.ForecastModel" />
     </fragment>
 </navigation>

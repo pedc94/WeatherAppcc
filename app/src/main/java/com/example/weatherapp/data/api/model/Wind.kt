@@ -1,10 +1,8 @@
 package com.example.weatherapp.data.api.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.squareup.moshi.Json
 
-@Parcelize
 data class Wind(
-    val deg: Int,
-    val speed: Double
-) : Parcelable
+    @field:Json(name = "deg") val deg: Int,
+    @field:Json(name = "speed") val speed: Double,
+)

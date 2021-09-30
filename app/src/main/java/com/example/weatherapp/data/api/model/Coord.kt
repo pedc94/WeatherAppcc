@@ -1,10 +1,8 @@
 package com.example.weatherapp.data.api.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.squareup.moshi.Json
 
-@Parcelize
 data class Coord(
-    val lat: Double,
-    val lon: Double
-):Parcelable
+    @field:Json(name = "lat") val lat: Double,
+    @field:Json(name = "lon") val lon: Double,
+)
