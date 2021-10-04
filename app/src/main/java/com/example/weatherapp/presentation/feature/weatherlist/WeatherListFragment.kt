@@ -10,10 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weatherapp.core.extensions.showActionBar
 import com.example.weatherapp.databinding.FragmentWeatherListBinding
 import com.example.weatherapp.domain.model.ForecastModel
 import com.example.weatherapp.presentation.feature.weatherlist.adapter.WeatherListAdapter
-import com.example.weatherapp.util.showActionBar
 
 class WeatherListFragment : Fragment() {
     private var _binding: FragmentWeatherListBinding? = null

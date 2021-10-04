@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.example.weatherapp.core.extensions.hideActionBar
 import com.example.weatherapp.core.utils.NetworkResult
 import com.example.weatherapp.databinding.FragmentLookUpBinding
-import com.example.weatherapp.util.hideActionBar
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,23 +55,25 @@ class LookUpFragment : Fragment() {
 
     private fun observeViewModel() {
         weatherViewModel.data.observe(this, { result ->
-            when (result) {
-                is NetworkResult.Success -> {
-                    result.data?.let {
-                        view?.findNavController()
-                            ?.navigate(LookUpFragmentDirections.actionLookUpFragmentToWeatherFragment(
-                                it.toTypedArray()))
-                        binding.pbLoadingData.visibility = View.GONE
+            result?.let {
+                when (result) {
+                    is NetworkResult.Success -> {
+                        result.data?.let {
+                            view?.findNavController()
+                                ?.navigate(LookUpFragmentDirections.actionLookUpFragmentToWeatherFragment(
+                                    it.toTypedArray()))
+                            binding.pbLoadingData.visibility = View.GONE
+                        }
                     }
-                }
-                is NetworkResult.Loading -> {
-                    binding.pbLoadingData.visibility = View.VISIBLE
-                }
-                is NetworkResult.Error -> {
-                    Toast.makeText(requireContext(),
-                        "An error occurred while loading data",
-                        Toast.LENGTH_SHORT).show()
-                    binding.pbLoadingData.visibility = View.GONE
+                    is NetworkResult.Loading -> {
+                        binding.pbLoadingData.visibility = View.VISIBLE
+                    }
+                    is NetworkResult.Error -> {
+                        binding.pbLoadingData.visibility = View.GONE
+                        Snackbar.make(binding.root,
+                            "An error occurred while loading data",
+                            Snackbar.LENGTH_LONG).show()
+                    }
                 }
             }
         })
@@ -80,16 +82,6 @@ class LookUpFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity).supportActionBar?.hide()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity).supportActionBar?.show()
     }
 
 }

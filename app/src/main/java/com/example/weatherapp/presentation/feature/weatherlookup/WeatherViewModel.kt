@@ -31,9 +31,9 @@ class WeatherViewModel @Inject constructor(private val weatherService: IWeatherS
             try {
                 val forecastList = weatherService.getForecast(city)
 
-                if (forecastList?.forecastList?.size!! > 0) {
+                if (forecastList?.forecastList?.size?:-1 > 0) {
                     val modelList =
-                        forecastList.forecastList.map { it.toDomain(city) }
+                        forecastList?.forecastList?.map { it.toDomain(city) }
                     _data.postValue(NetworkResult.Success(modelList))
                 } else
                     _data.postValue(NetworkResult.Error("City not found", null))
