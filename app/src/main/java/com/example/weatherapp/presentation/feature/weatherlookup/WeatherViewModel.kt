@@ -20,18 +20,14 @@ class WeatherViewModel @Inject constructor(private val weatherService: IWeatherS
     private var _data = MutableLiveData<NetworkResult<List<ForecastModel>?>?>()
     val data: LiveData<NetworkResult<List<ForecastModel>?>?> get() = _data
 
-    fun fetchForecast(city: String) {
-        fetchService(city)
-    }
-
-    private fun fetchService(city: String) {
+    fun fetchService(city: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _data.postValue(NetworkResult.Loading())
 
             try {
                 val forecastList = weatherService.getForecast(city)
 
-                if (forecastList?.forecastList?.size?:-1 > 0) {
+                if (forecastList?.forecastList.isNullOrEmpty()) {
                     val modelList =
                         forecastList?.forecastList?.map { it.toDomain(city) }
                     _data.postValue(NetworkResult.Success(modelList))

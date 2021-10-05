@@ -45,7 +45,7 @@ class LookUpFragment : Fragment() {
     private fun onClickLookUp() {
         binding.btnLookUp.setOnClickListener {
             if (!binding.etCityName.text.isNullOrBlank()) {
-                weatherViewModel.fetchForecast(binding.etCityName.text.toString().trim())
+                weatherViewModel.fetchService(binding.etCityName.text.toString().trim())
             } else {
                 binding.tfCityName.error = "Can not be empty"
             }
